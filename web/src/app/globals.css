@@ -1,26 +1,81 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes: false;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* daisyUI theme จาก design tokens (Botanical Hearth) — --size-field .3rem ทำให้ btn สูง 48px ตามกฎ tap target */
+@plugin "daisyui/theme" {
+  name: "treeshop";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #faf8f5;
+  --color-base-300: #e9e4dc;
+  --color-base-content: #1d261c;
+  --color-primary: #234e20;
+  --color-primary-content: #faf8f5;
+  --color-secondary: #d97746;
+  --color-secondary-content: #1d261c;
+  --color-accent: #8faf85;
+  --color-accent-content: #1d261c;
+  --color-neutral: #3f4a3d;
+  --color-neutral-content: #faf8f5;
+  --color-info: #2f6f8f;
+  --color-info-content: #ffffff;
+  --color-success: #2d5a27;
+  --color-success-content: #ffffff;
+  --color-warning: #b7791f;
+  --color-warning-content: #1d261c;
+  --color-error: #ba1a1a;
+  --color-error-content: #ffffff;
+  --radius-selector: 2rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.3rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* design tokens ตาม specs/002-catalog-browsing/design/README.md (Botanical Hearth)
+   ลูกค้าต้องการ: สบายตา อ่านง่าย — ตัวอักษรเข้ม contrast ≥ 7:1, ไม่ใช้ serif */
+@theme {
+  --color-canvas: #faf8f5;
+  --color-card: #ffffff;
+  --color-line: #e9e4dc;
+  --color-ink: #1d261c;
+  --color-ink-soft: #3f4a3d;
+  --color-primary: #234e20;
+  --color-primary-hover: #2d5a27;
+  --color-sage: #8faf85;
+  --color-terracotta: #d97746;
+  --color-oat: #f5f1eb;
+  --font-sans: var(--font-noto-sans-thai), "Noto Sans Thai", system-ui, sans-serif;
+  --radius-card: 1rem;
+  --shadow-card: 0 4px 16px -2px rgb(45 60 42 / 0.05);
+}
+
+html {
+  background: var(--color-canvas);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid rgb(143 175 133 / 0.6);
+  outline-offset: 2px;
 }

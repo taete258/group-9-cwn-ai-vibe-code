@@ -43,4 +43,10 @@ next-env.d.ts
 /src/generated/prisma
 
 !.env.example
-/uploads
+
+# playwright
+/test-results/
+/playwright-report/
+
+# mutation testing
+/.stryker-tmp/

@@ -1,7 +1,187 @@
 {
   "Home": {
     "title": "Tree Shop",
-    "tagline": "Online plant shop. Find the right plant for your home."
+    "tagline": "Online plant shop.\nFind the right plant for your home.",
+    "subtitle": "Healthy, hand-picked plants delivered safely to your door."
   },
-  "Lang": { "switch": "ภาษาไทย" }
+  "Lang": {
+    "switch": "ภาษาไทย"
+  },
+  "Header": {
+    "brand": "Tree Shop",
+    "home": "Home",
+    "trees": "All plants",
+    "rights": "© Tree Shop. All rights reserved.",
+    "fengShui": "Feng shui"
+  },
+  "Common": {
+    "soldOut": "Sold out",
+    "viewAll": "View all",
+    "vat": "incl. VAT"
+  },
+  "Species": {
+    "FOLIAGE": "Foliage",
+    "FLOWERING": "Flowering",
+    "SUCCULENT": "Succulents & cacti",
+    "FRUIT": "Fruit trees",
+    "HERB": "Herbs"
+  },
+  "Size": {
+    "S": "Small (tabletop)",
+    "M": "Medium (floor)",
+    "L": "Large (outdoor)"
+  },
+  "Care": {
+    "EASY": "Easy",
+    "MEDIUM": "Moderate",
+    "HARD": "Hard"
+  },
+  "Room": {
+    "LIVING": "Living room",
+    "BEDROOM": "Bedroom",
+    "OFFICE": "Office",
+    "KITCHEN": "Kitchen",
+    "ENTRANCE": "Entrance",
+    "BALCONY": "Balcony"
+  },
+  "Direction": {
+    "N": "North",
+    "NE": "Northeast",
+    "E": "East",
+    "SE": "Southeast",
+    "S": "South",
+    "SW": "Southwest",
+    "W": "West",
+    "NW": "Northwest"
+  },
+  "Benefit": {
+    "WEALTH": "Wealth",
+    "HEALTH": "Health",
+    "LOVE": "Love",
+    "CAREER": "Career"
+  },
+  "Tree": {
+    "breadcrumb": "Breadcrumb",
+    "stock": "{count} in stock",
+    "soldOut": "Sold out",
+    "vatNote": "(incl. VAT)",
+    "about": "About this plant",
+    "care": "Care guide",
+    "light": "Light",
+    "water": "Water",
+    "height": "Height",
+    "heightValue": "{cm} cm",
+    "pot": "Pot size",
+    "potValue": "{inch} in",
+    "careLevel": "Care level",
+    "petSafe": "Pet safe",
+    "petSafeHint": "Fine for homes with cats and dogs",
+    "petToxic": "Toxic to pets",
+    "petToxicHint": "Keep away from cats and dogs",
+    "fengShui": "Feng shui & placement",
+    "room": "Best room",
+    "direction": "Lucky direction",
+    "benefit": "Brings",
+    "disclaimer": "Guidance based on belief, for peace of mind",
+    "related": "Related plants",
+    "zoom": "Tap to zoom",
+    "photo": "Photo {n}",
+    "next": "Next photo",
+    "prev": "Previous photo",
+    "close": "Close",
+    "noPhoto": "No photo yet",
+    "nameTh": "Thai name",
+    "nameEn": "English name",
+    "scientific": "Scientific name",
+    "origin": "Origin"
+  },
+  "NotFound": {
+    "title": "We could not find that plant",
+    "body": "It may have been removed from the shop, or the link is wrong.",
+    "home": "Back to home",
+    "trees": "See all plants",
+    "pageTitle": "Page not found",
+    "pageBody": "The link may be wrong or the page has moved."
+  },
+  "Filter": {
+    "title": "Filters",
+    "toggle": "Collapse/expand",
+    "search": "Search plants",
+    "placeholder": "Type a Thai or English name",
+    "collection": "Collection",
+    "size": "Size",
+    "species": "Type",
+    "care": "Care level",
+    "all": "All",
+    "petSafe": "Pet safe",
+    "sort": "Sort by",
+    "apply": "Search",
+    "reset": "Clear filters",
+    "active": "Active filters",
+    "clearAll": "Clear all",
+    "remove": "Remove filter: {label}",
+    "sizes": {
+      "S": "Small",
+      "M": "Medium",
+      "L": "Large"
+    },
+    "sorts": {
+      "newest": "Newest",
+      "price_asc": "Price: low to high",
+      "price_desc": "Price: high to low"
+    }
+  },
+  "List": {
+    "title": "All plants",
+    "subtitle": "Hand-picked tropical plants that thrive at home — fresh and beautiful.",
+    "count": "{count} plants",
+    "emptyTitle": "No plants match your filters",
+    "emptyBody": "Try a different search or clear the filters to find the right plant for your home.",
+    "clear": "Clear filters"
+  },
+  "BenefitInfo": {
+    "WEALTH": "Supports luck, money and income — believed to draw prosperity into the home and business.",
+    "HEALTH": "Supports the physical and mental wellbeing of the household, good vitality, rest and fresh air.",
+    "LOVE": "Supports love, warmth and harmony in the family or between partners, filling the home with happiness.",
+    "CAREER": "Supports work, learning and progress — helping you stay focused and move forward in your career."
+  },
+  "Cart": {
+    "title": "Your cart",
+    "quantity": "Quantity",
+    "add": "Add to cart",
+    "added": "Added to cart",
+    "view": "View cart",
+    "empty": "Your cart is empty",
+    "emptyHint": "Pick a plant you like and add it to see the cost summary",
+    "browse": "Browse all plants",
+    "remove": "Remove item",
+    "inc": "Increase quantity",
+    "dec": "Decrease quantity",
+    "summary": "Order summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "freeRemaining": "Add {amount} more for free shipping",
+    "freeReached": "You get free shipping",
+    "total": "Total (VAT included)",
+    "net": "Price before VAT",
+    "vat": "VAT 7%",
+    "note": "This is a summary only. Online ordering is not available yet.",
+    "warnOut": "{name} is sold out",
+    "warnLow": "Only {count} of {name} left",
+    "warnPrice": "Price of {name} changed to {price}",
+    "ack": "Accept new price",
+    "unavailable": "Some items are no longer available",
+    "clear": "Clear cart"
+  },
+  "FengShui": {
+    "title": "Where to place your plants (feng shui)",
+    "subtitle": "Pick a room and what you want to boost to see suitable plants and the direction to place them",
+    "room": "Room",
+    "benefit": "What to boost",
+    "submit": "Show suggestions",
+    "results": "Suggested plants",
+    "none": "No plants are suggested for this choice yet. Try another room or goal.",
+    "nav": "Feng shui"
+  }
 }

@@ -10,20 +10,13 @@ services:
       test: ["CMD-SHELL", "pg_isready -U tree"]
       interval: 2s
       retries: 30
-  mailpit:
-    image: axllent/mailpit
-    ports: ["8025:8025", "1025:1025"]
   web:
     build: ./web
     env_file: ./web/.env
     environment:
       DATABASE_URL: postgresql://tree:tree@db:5432/tree
-      SMTP_URL: smtp://mailpit:1025
     ports: ["3000:3000"]
-    volumes: [uploads:/app/uploads]
     depends_on:
       db: { condition: service_healthy }
-      mailpit: { condition: service_started }
 volumes:
   db-data:
-  uploads:
