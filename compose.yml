@@ -1,0 +1,29 @@
+# spec 8.1: docker compose up -d --build เปิดครบทุก service
+name: tree-shop
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_USER: tree, POSTGRES_PASSWORD: tree, POSTGRES_DB: tree }
+    ports: ["5435:5432"]
+    volumes: [db-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tree"]
+      interval: 2s
+      retries: 30
+  mailpit:
+    image: axllent/mailpit
+    ports: ["8025:8025", "1025:1025"]
+  web:
+    build: ./web
+    env_file: ./web/.env
+    environment:
+      DATABASE_URL: postgresql://tree:tree@db:5432/tree
+      SMTP_URL: smtp://mailpit:1025
+    ports: ["3000:3000"]
+    volumes: [uploads:/app/uploads]
+    depends_on:
+      db: { condition: service_healthy }
+      mailpit: { condition: service_started }
+volumes:
+  db-data:
+  uploads:

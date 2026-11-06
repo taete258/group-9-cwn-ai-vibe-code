@@ -1,0 +1,236 @@
+// Data model ตาม spec.md ข้อ 5
+// เงินทุกช่องเป็นสตางค์ (Int) และราคารวม VAT แล้ว
+// CHECK constraint (stock >= 0, quantity > 0) อยู่ใน migration SQL เพราะ Prisma schema ยังเขียนไม่ได้
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum Locale {
+  th
+  en
+}
+
+enum Species {
+  FOLIAGE
+  FLOWERING
+  SUCCULENT
+  FRUIT
+  HERB
+}
+
+enum Size {
+  S
+  M
+  L
+}
+
+enum CareLevel {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum Room {
+  LIVING
+  BEDROOM
+  OFFICE
+  KITCHEN
+  ENTRANCE
+  BALCONY
+}
+
+enum Direction {
+  N
+  NE
+  E
+  SE
+  S
+  SW
+  W
+  NW
+}
+
+enum Benefit {
+  WEALTH
+  HEALTH
+  LOVE
+  CAREER
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(cuid()) // seed ใช้ id ตายตัว เช่น "M001", "ADMIN" (X-Test-User)
+  email        String   @unique
+  passwordHash String
+  name         String
+  phone        String?
+  locale       Locale   @default(th)
+  role         Role     @default(CUSTOMER)
+  createdAt    DateTime @default(now())
+
+  addresses  Address[]
+  cartItems  CartItem[]
+  orders     Order[]
+  statusLogs OrderStatusLog[]
+}
+
+model Address {
+  id          Int     @id @default(autoincrement())
+  userId      String
+  recipient   String
+  phone       String
+  line1       String
+  subdistrict String
+  district    String
+  province    String
+  postcode    String  @db.Char(5)
+  isDefault   Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Tree {
+  id            Int       @id @default(autoincrement())
+  slug          String    @unique
+  nameTh        String
+  nameEn        String
+  descriptionTh String
+  descriptionEn String
+  species       Species
+  size          Size
+  careLevel     CareLevel
+  lightTh       String
+  lightEn       String
+  waterTh       String
+  waterEn       String
+  heightCm      Int?
+  potSizeInch   Int?
+  petSafe       Boolean
+  price         Int // สตางค์ รวม VAT
+  stock         Int
+  images        String[]
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+
+  fengShui    FengShui[]
+  collections CollectionItem[]
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+}
+
+model FengShui {
+  id        Int       @id @default(autoincrement())
+  treeId    Int
+  room      Room
+  direction Direction
+  benefit   Benefit
+  reasonTh  String
+  reasonEn  String
+
+  tree Tree @relation(fields: [treeId], references: [id], onDelete: Cascade)
+
+  @@index([room, benefit])
+}
+
+model Collection {
+  id        Int     @id @default(autoincrement())
+  slug      String  @unique
+  nameTh    String
+  nameEn    String
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  items CollectionItem[]
+}
+
+model CollectionItem {
+  collectionId Int
+  treeId       Int
+  sortOrder    Int @default(0)
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  tree       Tree       @relation(fields: [treeId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, treeId])
+}
+
+model CartItem {
+  userId   String
+  treeId   Int
+  quantity Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tree Tree @relation(fields: [treeId], references: [id])
+
+  @@id([userId, treeId])
+}
+
+model Order {
+  id              Int         @id @default(autoincrement())
+  code            String      @unique // TS-YYYYMMDD-NNNN
+  userId          String
+  shippingAddress Json // copy ของ Address ณ ตอนสั่ง
+  note            String?
+  subtotal        Int
+  shippingFee     Int
+  vat             Int
+  total           Int
+  slipUrl         String?
+  status          OrderStatus @default(PENDING_PAYMENT)
+  trackingNo      String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user      User             @relation(fields: [userId], references: [id])
+  items     OrderItem[]
+  statusLog OrderStatusLog[]
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id             Int    @id @default(autoincrement())
+  orderId        Int
+  treeId         Int
+  nameThSnapshot String
+  nameEnSnapshot String
+  priceSnapshot  Int
+  quantity       Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  tree  Tree  @relation(fields: [treeId], references: [id])
+}
+
+model OrderStatusLog {
+  id        Int         @id @default(autoincrement())
+  orderId   Int
+  status    OrderStatus
+  changedBy String
+  createdAt DateTime    @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [changedBy], references: [id])
+
+  @@index([orderId])
+}
