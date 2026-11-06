@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "mutate": [
+    "src/rules/cart.ts"
+  ],
+  "reporters": [
+    "clear-text",
+    "html",
+    "json"
+  ],
+  "htmlReporter": {
+    "fileName": "mutation/report.html"
+  },
+  "jsonReporter": {
+    "fileName": "mutation/report.json"
+  },
+  "tempDirName": ".stryker-tmp",
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 70
+  },
+  "ignorePatterns": [
+    "**",
+    "!src/**",
+    "!tests/unit/**",
+    "!tests/property/**",
+    "!package.json",
+    "!vitest.config.mts",
+    "!tsconfig.json"
+  ]
+}
