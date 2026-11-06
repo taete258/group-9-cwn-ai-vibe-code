@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tree Shop — Requirements (ร่าง)</title>
+<style>
+:root{--bg:#f7f8f5;--card:#fff;--fg:#1d2a22;--mut:#66756b;--line:#dde3da;--acc:#2f7d4f;--p1:#c0392b;--p2:#d98a00;--p3:#5c7cfa}
+@media(prefers-color-scheme:dark){:root{--bg:#121714;--card:#1b2420;--fg:#e6ece8;--mut:#93a39a;--line:#2c3a33;--acc:#5fc489}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,"Noto Sans Thai",sans-serif}
+main{max-width:920px;margin:0 auto;padding:24px 16px 80px}
+h1{margin:0 0 4px}h2{margin:36px 0 12px;border-bottom:2px solid var(--acc);padding-bottom:4px}
+.sub{color:var(--mut);margin:0 0 16px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1}
+button{border:1px solid var(--line);background:var(--card);color:var(--fg);padding:4px 12px;border-radius:99px;cursor:pointer;font:inherit}
+button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.s{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+.s h3{margin:0 0 6px;font-size:1.05rem}
+.tag{font-size:.75rem;font-weight:700;color:#fff;border-radius:4px;padding:1px 7px;margin-right:6px}
+.P1{background:var(--p1)}.P2{background:var(--p2)}.P3{background:var(--p3)}
+.q{border-left:3px solid var(--acc);padding-left:10px;margin:6px 0}
+.ac{margin:8px 0 0;padding-left:0;list-style:none}
+.ac li::before{content:"☐ ";color:var(--acc)}
+.ref{color:var(--mut);font-size:.8rem;margin-top:6px}
+.open{background:#fff6e0;color:#5a4300;border-radius:6px;padding:6px 10px;margin-top:8px;font-size:.9rem}
+@media(prefers-color-scheme:dark){.open{background:#3a2f12;color:#f3dfa4}}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;font-size:.92rem}th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-size:.8rem}td:first-child{white-space:nowrap}
+</style>
+</head>
+<body>
+<main>
+<h1>Tree Shop — Requirements</h1>
+<p class="sub">Business · Functional · Non-functional · ร่างจาก spec.md v0.4 (ตัด login/สั่งซื้อ/แอดมินออก) · ที่มาของแต่ละข้อดูใน <a href="user-stories.html">user-stories.html</a></p>
+<div id="reqs"></div>
+</main>
+<script>
+const FR=[
+["FR-01","แสดงหน้าแรกเป็นแถวหมวด (เสริมดวง ตกแต่ง ผักผลไม้ ขนาด สายพันธุ์) ตามลำดับใน seed data","US-01"],
+["FR-02","ค้นหา/กรอง/เรียงลำดับรายการต้นไม้ และเก็บค่ากรองใน URL","US-02"],
+["FR-03","แสดงรายละเอียดต้นไม้ครบในหน้าเดียว: รูป ราคา stock คำอธิบาย ข้อมูลการดูแล ฮวงจุ้ย สินค้าที่เกี่ยวข้อง 4 รายการ","US-03"],
+["FR-04","แนะนำต้นไม้ตามห้อง × เรื่องที่อยากเสริม พร้อมทิศและเหตุผล ด้วยกฎ rule-based","US-10"],
+["FR-05","ตะกร้า: เพิ่ม/ลด/ลบ จำกัดไม่เกิน stock, Guest เท่านั้น เก็บใน localStorage","US-04"],
+["FR-06","คำนวณ subtotal ค่าส่ง ยอดสุทธิ VAT และราคาก่อน VAT ด้วยฟังก์ชันเดียวกันทั้ง client และ server (/api/cart/quote)","US-04"],
+["FR-07","เตือนลูกค้าเมื่อราคาหรือ stock เปลี่ยนจากตอนใส่ตะกร้า","US-04"],
+["FR-23","สองภาษา th/en: prefix ภาษาใน URL สลับภาษาอยู่หน้าเดิม จำใน cookie","US-11"],
+];
+const NFR=[
+["NFR-01","Responsive ใช้บนมือถือเป็นหลัก ทดสอบที่ 375px","ข้อ 9"],
+["NFR-02","รูปทุกรูปแสดงผ่าน next/image","ข้อ 9"],
+["NFR-03","Security: validate input ทุกตัวที่ server (เช่น พารามิเตอร์ค้นหา/กรอง และ payload ของ /api/cart/quote)","ข้อ 9"],
+["NFR-09","ความถูกต้องของเงิน: เก็บเป็นสตางค์ (int) ปัด VAT ครั้งเดียวที่ยอดสุทธิ มี unit test ครอบฟังก์ชันคำนวณ","ข้อ 4, 9"],
+["NFR-11","i18n: ข้อความ UI อยู่ใน messages/th.json และ en.json; ใช้ Intl; พ.ศ./ค.ศ. ตามภาษา; html lang + hreflang ผ่าน HTTP header Link","ข้อ 9.1"],
+["NFR-12","Error contract: 4xx + {error: CODE, message}; test เทียบเฉพาะ error","ข้อ 13.1"],
+["NFR-13","Deployability: รันทุก service (web, db PostgreSQL 16) ด้วย docker compose ไฟล์เดียว","ข้อ 8.1"],
+];
+const BR=[
+["BR-02","ลูกค้าหาต้นไม้และเห็นยอดรวมในตะกร้าได้ภายใน 3 นาที","ข้อ 1"],
+["BR-03","ราคาที่แสดงทุกที่รวม VAT 7% แล้ว (ยอด VAT = round(total×7/107))","ข้อ 4"],
+["BR-04","ค่าส่ง ฿60; ส่งฟรีเมื่อ subtotal ≥ ฿1,000 [สมมติฐาน, Q4]","ข้อ 4"],
+["BR-10","คำแนะนำฮวงจุ้ยเป็นความเชื่อเพื่อความสบายใจ ต้องมีข้อความกำกับ และใช้ rule-based ไม่ใช้ AI","ข้อ 3.1"],
+["BR-12","ขายต้นไม้ร้านเดียว ไม่มี login/สั่งซื้อ/แอดมิน จัดการข้อมูลผ่าน seed data เท่านั้น; ไม่ทำ marketplace, คูปอง, รีวิว, ภาษาที่ 3","ข้อ 1, 10"],
+["BR-13","ขอบเขตต้องทำเสร็จภายใน workshop [สมมติฐาน, Q1]","ข้อ 1, 11"],
+];
+const REMOVED=[["FR-24", "Endpoint สำหรับทดสอบ (/api/test/reset, /api/test/bug-mode) และ BUG_MODE — ยังไม่ได้ทำ ไม่อยู่ในขอบเขตรอบนี้"], ["NFR-10", "เวลา ISO 8601 +07:00 และ now() — ไม่มี API ที่ส่งข้อมูลเวลา"], ["BR-01", "ใครก็ดูสินค้าและใส่ตะกร้าได้ แต่ต้องเป็นสมาชิกจึงสั่งซื้อและดูประวัติได้"], ["BR-05", "ชำระเงินด้วยโอน PromptPay + สลิป ตรวจโดยแอดมินด้วยมือ ไม่มี payment gateway [สมมติฐาน]"], ["BR-06", "ออเดอร์เป็น PAID ได้เมื่อมีสลิป; SHIPPED ต้องมีเลขพัสดุ"], ["BR-07", "ลูกค้ายกเลิกเองได้เฉพาะก่อนชำระ; แอดมินยกเลิกได้จนถึง PAID; ยกเลิกแล้วคืน stock"], ["BR-08", "ออเดอร์ไม่แนบสลิปภายใน 24 ชม. ถูกยกเลิก [สมมติฐาน, Q9]"], ["BR-09", "สินค้าไม่ลบจริง ใช้ซ่อน เพื่อไม่ให้ประวัติออเดอร์พัง"], ["BR-11", "เจ้าของร้านรู้ทันทีเมื่อมีออเดอร์ใหม่ และจัดการได้จากที่เดียว (/admin)"], ["FR-08", "สมัคร login logout ลืมรหัสผ่าน (ลิงก์รีเซ็ตทางอีเมล) ด้วยอีเมล+รหัสผ่าน"], ["FR-09", "Guest กด “สั่งซื้อ” แล้วบังคับ login และกลับ checkout โดยตะกร้ายังอยู่"], ["FR-10", "จัดการที่อยู่จัดส่งหลายที่อยู่ ตั้งที่อยู่หลัก เติมอัตโนมัติใน checkout"], ["FR-11", "สร้างคำสั่งซื้อ: server คำนวณและตรวจ stock ใหม่, ตัด stock ใน transaction, สร้างเลข TS-YYYYMMDD-NNNN, ล้างตะกร้า"], ["FR-12", "ชำระผ่าน PromptPay QR และแนบสลิป (ตอนสั่งหรือภายหลัง)"], ["FR-13", "ประวัติคำสั่งซื้อและรายละเอียด พร้อม timeline สถานะและเลขพัสดุ เห็นเฉพาะของตัวเอง"], ["FR-14", "ลูกค้ายกเลิกเองได้เฉพาะ PENDING_PAYMENT และสั่งซื้อซ้ำจากออเดอร์เดิมได้"], ["FR-15", "สถานะ PENDING_PAYMENT→PAID→SHIPPED→COMPLETED และ CANCELLED ตามเงื่อนไขในข้อ 6 พร้อมบันทึก OrderStatusLog"], ["FR-16", "ยกเลิกออเดอร์ทุกกรณี (ลูกค้า แอดมิน อัตโนมัติ) แล้วคืน stock"], ["FR-17", "ยกเลิกอัตโนมัติเมื่อไม่แนบสลิปภายใน 24 ชม."], ["FR-18", "แอดมิน: รายการออเดอร์ กรอง ค้นหา ดูสลิป เปลี่ยนสถานะ (SHIPPED ต้องมี trackingNo)"], ["FR-19", "แอดมิน: เพิ่ม/แก้/ซ่อนสินค้า อัปโหลดและเรียงรูป แก้ราคาและ stock กรอกข้อมูลฮวงจุ้ย"], ["FR-20", "แอดมิน: จัดการหมวด สินค้าในหมวด และลำดับแถวหน้าแรก"], ["FR-21", "แจ้งเตือนแอดมิน (LINE หรือ Email) เมื่อมีออเดอร์ใหม่/สลิปเข้า และแสดงจำนวนรอตรวจสลิปที่ /admin"], ["FR-22", "จำกัดสิทธิ์: /admin/* และ /api/admin/* เฉพาะ role = ADMIN; สร้างแอดมินแรกผ่าน seed script"], ["NFR-04", "Security: bcrypt hash รหัสผ่าน ความยาว ≥ 8 ตัวอักษร"], ["NFR-05", "Security: เช็ก userId ทุก query ของออเดอร์ ที่อยู่ สลิป (ข้ามบัญชี → 404; ไม่ใช่แอดมิน → 403)"], ["NFR-06", "Security: สลิปเฉพาะ jpg/png/webp ≤ 5MB และตั้งชื่อไฟล์ใหม่แบบสุ่ม"], ["NFR-07", "Security: rate limit ที่ login สมัครสมาชิก ลืมรหัสผ่าน และ POST /api/orders"], ["NFR-08", "Concurrency: ตัด stock ด้วย UPDATE … WHERE stock >= qty ใน transaction; 50 คนแย่งชิ้นสุดท้าย สำเร็จ 1, stock ไม่ติดลบ"], ["NFR-14", "Testability: X-Test-User ต้องใช้ไม่ได้เมื่อ TEST_MODE ≠ 1 (กันสวมรอยบน production)"], ["NFR-15", "Notification latency: แจ้งแอดมิน ≤ 1 นาที"]];
+function table(title,rows,id){
+  return `<h2 id="${id}">${title} (${rows.length})</h2><table><thead><tr><th>ID</th><th>ข้อกำหนด</th><th>ที่มา</th></tr></thead><tbody>`+
+  rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1].replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}</td><td class="ref">${r[2]}</td></tr>`).join("")+`</tbody></table>`;
+}
+document.getElementById("reqs").innerHTML=table("Business Requirements",BR,"br")+table("Functional Requirements",FR,"fr")+table("Non-functional Requirements",NFR,"nfr")+`<h2 id="removed">ตัดออกจากขอบเขต (v0.4) (${REMOVED.length})</h2><p class="sub">ไม่ renumber เพื่อให้ ID ที่เอกสารอื่นอ้างอิงยังคงเดิม</p><table style="color:var(--mut)"><thead><tr><th>ID</th><th>ข้อกำหนด</th><th>เหตุผล</th></tr></thead><tbody>`+REMOVED.map(r=>`<tr><td><s>${r[0]}</s></td><td><s>${r[1]}</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr>`).join("")+`</tbody></table>`;
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tree Shop — User Stories (ร่าง)</title>
+<style>
+:root{--bg:#f7f8f5;--card:#fff;--fg:#1d2a22;--mut:#66756b;--line:#dde3da;--acc:#2f7d4f;--p1:#c0392b;--p2:#d98a00;--p3:#5c7cfa}
+@media(prefers-color-scheme:dark){:root{--bg:#121714;--card:#1b2420;--fg:#e6ece8;--mut:#93a39a;--line:#2c3a33;--acc:#5fc489}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,"Noto Sans Thai",sans-serif}
+main{max-width:920px;margin:0 auto;padding:24px 16px 80px}
+h1{margin:0 0 4px}h2{margin:36px 0 12px;border-bottom:2px solid var(--acc);padding-bottom:4px}
+.sub{color:var(--mut);margin:0 0 16px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1}
+button{border:1px solid var(--line);background:var(--card);color:var(--fg);padding:4px 12px;border-radius:99px;cursor:pointer;font:inherit}
+button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.s{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+.s h3{margin:0 0 6px;font-size:1.05rem}
+.tag{font-size:.75rem;font-weight:700;color:#fff;border-radius:4px;padding:1px 7px;margin-right:6px}
+.P1{background:var(--p1)}.P2{background:var(--p2)}.P3{background:var(--p3)}
+.q{border-left:3px solid var(--acc);padding-left:10px;margin:6px 0}
+.ac{margin:8px 0 0;padding-left:0;list-style:none}
+.ac li::before{content:"☐ ";color:var(--acc)}
+.ref{color:var(--mut);font-size:.8rem;margin-top:6px}
+.open{background:#fff6e0;color:#5a4300;border-radius:6px;padding:6px 10px;margin-top:8px;font-size:.9rem}
+@media(prefers-color-scheme:dark){.open{background:#3a2f12;color:#f3dfa4}}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;font-size:.92rem;color:var(--mut)}th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:.8rem}td:first-child{white-space:nowrap}
+</style>
+</head>
+<body>
+<main>
+<h1>Tree Shop — User Stories</h1>
+<p class="sub">ร่างแรก สกัดจาก spec.md v0.4 (ตัด login/สั่งซื้อ/แอดมินออก) · 6 stories: P1 × 4, P2 × 2, P3 × 0 · ผู้ใช้เดียวคือ ผู้เยี่ยมชม (Guest) · จัดลำดับความสำคัญเป็นข้อเสนอ ยังไม่ได้ยืนยัน · Requirements แยกไปที่ <a href="requirements.html">requirements.html</a> · P1 = MVP ขาดไม่ได้, P2 = ควรมี, P3 = มีถ้าทัน</p>
+<div class="bar" id="bar"></div>
+<div id="out"></div>
+<h2 id="removed">ตัดออกจากขอบเขต (v0.4)</h2>
+<p class="sub">เรื่องเหล่านี้ถูกตัดออก ไม่ renumber เพื่อให้ ID ที่เอกสารอื่นอ้างอิงยังคงเดิม</p>
+<table><thead><tr><th>ID</th><th>เรื่อง</th><th>เหตุผล</th></tr></thead><tbody><tr><td><s>US-05</s></td><td><s>สมัครสมาชิกและ login</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-06</s></td><td><s>กรอกที่อยู่และสั่งซื้อ</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-07</s></td><td><s>ดูประวัติและสถานะคำสั่งซื้อ</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-08</s></td><td><s>ยกเลิกออเดอร์ แนบสลิปภายหลัง และสั่งซื้อซ้ำ</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-09</s></td><td><s>จัดการโปรไฟล์และหลายที่อยู่</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-12</s></td><td><s>เข้า /admin ด้วยบัญชี ADMIN เท่านั้น</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-13</s></td><td><s>ดูและเปลี่ยนสถานะคำสั่งซื้อ ตรวจสลิป</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-14</s></td><td><s>เพิ่ม แก้ไข ซ่อนสินค้า (แอดมิน)</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-15</s></td><td><s>จัดการหมวดและลำดับแถวหน้าแรก (แอดมิน)</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-16</s></td><td><s>แจ้งเตือนแอดมินเมื่อมีออเดอร์ใหม่</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr><tr><td><s>US-17</s></td><td><s>ยกเลิกออเดอร์ไม่แนบสลิปอัตโนมัติ 24 ชม.</s></td><td>ไม่มีระบบ login/สั่งซื้อ/แอดมินแล้ว</td></tr></tbody></table>
+</main>
+<script>
+// ponytail: data-driven page, edit STORIES to iterate; no framework, no build.
+const STORIES = [
+// [id, role, priority, want, so, [acceptance...], ref, open?]
+["US-01","ผู้เยี่ยมชม","P1","เห็นต้นไม้แนะนำแยกตามหมวดที่หน้าแรก","ได้เลือกดูตามความสนใจ (เสริมดวง ตกแต่ง ผักผลไม้ ขนาด สายพันธุ์)",
+ ["แถวหมวดเรียงตามลำดับใน seed data เลื่อนแนวนอนได้","ปุ่ม “ดูทั้งหมด” ไปหน้ารายการที่กรองหมวดนั้นไว้","การ์ดแสดงรูป ชื่อ ราคารวม VAT และป้าย “สินค้าหมด” เมื่อ stock = 0"],"F1 · AC: หน้าแรก",""],
+["US-02","ผู้เยี่ยมชม","P1","ค้นหาและกรองต้นไม้","หาต้นที่ตรงใจได้เร็ว",
+ ["กรองตามหมวด ขนาด สายพันธุ์ ระดับการดูแล ปลอดภัยต่อสัตว์เลี้ยง","ค้นหาชื่อไทย/อังกฤษ และเรียงตามใหม่สุด/ราคา","ค่ากรองอยู่ใน URL แชร์ลิงก์ได้"],"F2",""],
+["US-03","ผู้เยี่ยมชม","P1","ดูรายละเอียดต้นไม้ในหน้าเดียว","ตัดสินใจซื้อได้โดยไม่ต้องเปิดหลายหน้า",
+ ["แกลเลอรีรูป ปัดบนมือถือและกดขยายได้","แสดงข้อมูลการดูแลและกล่องฮวงจุ้ย (ห้อง/ทิศ/ความหมาย)","เลือกจำนวนไม่เกิน stock แล้วใส่ตะกร้า","แสดงสินค้าที่เกี่ยวข้อง 4 รายการ"],"F3",""],
+["US-04","ผู้เยี่ยมชม","P1","จัดการตะกร้า (เพิ่ม/ลด/ลบ) และเห็นยอดรวม VAT 7% กับค่าส่ง","รู้ยอดรวมจริงที่ต้องจ่าย",
+ ["Guest ใส่ตะกร้าได้ เก็บใน localStorage (ไม่ต้อง login)","ยอดรวม/VAT/ค่าส่งคำนวณผ่าน /api/cart/quote","ตะกร้า 890 บาท ค่าส่ง 60 · ตะกร้า 1,000 บาท ส่งฟรี","เตือนเมื่อราคา/stock เปลี่ยนตั้งแต่ใส่ตะกร้า","ยอดไม่ถึงเกณฑ์ส่งฟรีแสดง “ซื้อเพิ่มอีก ฿110 เพื่อรับส่งฟรี”"],"F5 · ข้อ 4",
+ "ค่าส่งรวม VAT ไหม และกติกา 60/1,000 ใช้ได้ไหม (Q4)"],
+["US-10","ผู้เยี่ยมชม","P2","เลือกห้องและเรื่องที่อยากเสริมเพื่อรับคำแนะนำฮวงจุ้ย","รู้ว่าควรวางต้นไม้ทิศไหนในบ้าน",
+ ["เลือกห้อง 6 แบบ × เรื่อง 4 แบบ (การเงิน/สุขภาพ/ความรัก/การงาน)","ผลลัพธ์เป็นรายการต้นไม้พร้อมทิศและเหตุผล (rule-based)","มีข้อความ “คำแนะนำตามความเชื่อ เพื่อความสบายใจ”"],"F4",
+ "rule-based พอไหม หรืออยากได้ละเอียดกว่านี้ (Q6)"],
+["US-11","ผู้เยี่ยมชม","P2","สลับภาษาไทย/อังกฤษโดยอยู่หน้าเดิม","ใช้งานได้ทั้งสองภาษา",
+ ["สลับแล้วอยู่หน้าเดิม ตะกร้าไม่หาย","ไม่มีข้อความไทยหลงในหน้า /en","ยอดเงินเท่ากันทุกสตางค์ทั้งสองภาษา"],"ข้อ 9.1",""],
+];
+const roles=["ทั้งหมด",...new Set(STORIES.map(s=>s[1]))], pris=["P1","P2","P3"];
+let role="ทั้งหมด", pri=null;
+const bar=document.getElementById("bar"), out=document.getElementById("out");
+function render(){
+  bar.innerHTML="";
+  roles.forEach(r=>bar.append(btn(r,r===role,()=>{role=r;render()})));
+  pris.forEach(p=>bar.append(btn(p,p===pri,()=>{pri=pri===p?null:p;render()})));
+  const esc=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  out.innerHTML=STORIES.filter(s=>(role==="ทั้งหมด"||s[1]===role)&&(!pri||s[2]===pri)).map(s=>`
+  <section class="s"><h3><span class="tag ${s[2]}">${s[2]}</span>${s[0]}</h3>
+  <div class="q">ในฐานะ<b>${s[1]}</b> ฉันต้องการ<b>${esc(s[3])}</b> เพื่อ${esc(s[4])}</div>
+  <ul class="ac">${s[5].map(a=>`<li>${esc(a)}</li>`).join("")}</ul>
+  <div class="ref">อ้างอิง spec: ${s[6]}</div>
+  ${s[7]?`<div class="open">❓ ยังเปิดอยู่: ${esc(s[7])}</div>`:""}</section>`).join("");
+}
+function btn(t,on,f){const b=document.createElement("button");b.textContent=t;b.className=on?"on":"";b.onclick=f;return b}
+render();
+</script>
+</body>
+</html>
